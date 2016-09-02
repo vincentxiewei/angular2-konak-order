@@ -3,6 +3,7 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'my-dashboard',
   templateUrl: 'app/dashboard.component.html',
