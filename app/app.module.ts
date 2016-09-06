@@ -19,6 +19,12 @@ import { routing } from './app.routing';
 import {DashboardComponent} from './dashboard.component';
 import { HeroSearchComponent} from './hero-search.component';
 
+//Order
+import {OrderComponent} from './component/order.component';
+import { OrderService }         from './service/order.service';
+
+
+//Order
 
 
 @NgModule({
@@ -29,8 +35,9 @@ import { HeroSearchComponent} from './hero-search.component';
     HeroDetailComponent,
     HeroesComponent,
     DashboardComponent,
-    HeroSearchComponent],
-  providers: [HeroService],
+    HeroSearchComponent,
+    OrderComponent],
+  providers: [HeroService, OrderService],
   bootstrap: [ AppComponent ]
 
 })
