@@ -1,8 +1,8 @@
 export class Order {
-  id : number;
-  firstName : string;
+  //id : number;
+  //firstName : string;
   middleName : string;
-  lastName : string;
+  //lastName : string;
   email : string;
   contactAreaCode: string;
   contractName : string;
@@ -13,4 +13,14 @@ export class Order {
   billingZipCode : string;
   billingCountry : string;
   orderComment : string;
+
+  constructor (
+    public id: number,
+    public firstName: string,
+    public lastName: string,
+    public name: string,
+    public power: string,
+    public alterEgo?: string
+  ) {
+  }
 }
