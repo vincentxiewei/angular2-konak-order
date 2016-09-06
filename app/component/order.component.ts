@@ -24,11 +24,12 @@ import { Order } from './../model/Order';
 
     countries = ['Australia', 'China', 'America'];
 
-    order = new Order(18, 'Vincent', 'Xie',
-                'Dr IQ', this.powers[0], 'Chuck Overstreet');
+    //order = new Order(18, 'Vincent', 'Xie',
+    //            'Dr IQ', this.powers[0], 'Chuck Overstreet');
 
+    order = new Order();
+    //this is to reset the angular form for validation
     active = true;
-
 
     submitted = false;
 
@@ -45,7 +46,8 @@ import { Order } from './../model/Order';
     private router: Router) {}
 
   resetOrder() {
-    this.order = new Order(24, "","","","");
+    //this.order = new Order(24, "","","","");
+    this.order = new Order();
     this.active = false;
     setTimeout(() => this.active = true, 0);
   }

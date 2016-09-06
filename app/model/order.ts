@@ -14,6 +14,9 @@ export class Order {
   billingCountry : string;
   orderComment : string;
 
+  constructor(){}
+  /*
+
   constructor (
     public id: number,
     public firstName: string,
@@ -23,4 +26,5 @@ export class Order {
     public alterEgo?: string
   ) {
   }
+  */
 }
