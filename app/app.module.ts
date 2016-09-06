@@ -9,6 +9,7 @@ import { HttpModule }    from '@angular/http';
 import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
+import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AppComponent }  from './app.component';
 import {HeroDetailComponent} from './hero-detail.component';
@@ -19,16 +20,18 @@ import {DashboardComponent} from './dashboard.component';
 import { HeroSearchComponent} from './hero-search.component';
 
 
+
 @NgModule({
   imports: [ BrowserModule, FormsModule,HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),routing],
+    InMemoryWebApiModule.forRoot(InMemoryDataService),routing //],
+    , Ng2BootstrapModule],
   declarations: [ AppComponent,
     HeroDetailComponent,
     HeroesComponent,
     DashboardComponent,
     HeroSearchComponent],
   providers: [HeroService],
-  bootstrap: [ AppComponent ],
+  bootstrap: [ AppComponent ]
 
 })
 export class AppModule { }
