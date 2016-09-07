@@ -5,7 +5,7 @@ export class Order {
   lastName : string;
   email : string;
   contactAreaCode: string;
-  contractName : string;
+  contactNumber: string
   billingStreet1 : string;
   billingStreet2 : string;
   billingCity : string;
