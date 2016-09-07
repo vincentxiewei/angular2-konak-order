@@ -1,5 +1,6 @@
-//import { Component, OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+//import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { Router }            from '@angular/router';
 import { Observable }        from 'rxjs/Observable';
@@ -7,6 +8,7 @@ import { Subject }           from 'rxjs/Subject';
 //import { HeroSearchService } from './hero-search.service';
 import { OrderService } from './../service/order.service';
 import { Order } from './../model/Order';
+
 @Component({
   selector: 'order',
   templateUrl: 'app/component/order.component.html',
@@ -14,8 +16,8 @@ import { Order } from './../model/Order';
   styleUrls:  ['app/component/order.component.css'],
   providers: [OrderService]
 })
-//export class OrderComponent implements OnInit {
-  export class OrderComponent {
+export class OrderComponent implements OnInit {
+//  export class OrderComponent {
   //orders: Observable<Order[]>;
   //private searchTerms = new Subject<string>();
 
@@ -34,8 +36,10 @@ import { Order } from './../model/Order';
     submitted = false;
 
     onSubmit () {
+
       this.submitted = true;
       console.log("form has been submitted");
+      console.log(JSON.stringify(this.order));
     }
 
 // TODO: Remove this when we're done
@@ -53,7 +57,9 @@ import { Order } from './../model/Order';
   }
   ngOnInit(): void {
 
+
   }
+
 
   // Push a search term into the observable stream.
   /*

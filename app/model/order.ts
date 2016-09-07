@@ -1,8 +1,8 @@
 export class Order {
   //id : number;
-  //firstName : string;
+  firstName : string;
   middleName : string;
-  //lastName : string;
+  lastName : string;
   email : string;
   contactAreaCode: string;
   contractName : string;
@@ -27,4 +27,5 @@ export class Order {
   ) {
   }
   */
+
 }

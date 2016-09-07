@@ -3,22 +3,61 @@
 <div class="container">
   <h1>Order Form</h1>
   <form *ngIf = "active" (ngSubmit)="onSubmit()" #orderForm="ngForm">
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input type="text" class="form-control"
-             id="firstName" required
-          [(ngModel)]="order.firstName" name="firstName">
+    <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control"
+                   id="firstName" required
+                [(ngModel)]="order.firstName" name="firstName"
+                   #firstName="ngModel">
+          </div>
+          <div [hidden]="firstName.valid || firstName.pristine"
+               class="alert alert-danger">
+            First Name is required
+          </div>
+        </div>
+      <div class="col-md-2">
+          <div class="form-group">
+            <label for="middleName">Middle Name</label>
+            <input type="text" class="form-control" id="middleName"
+                   [(ngModel)]="order.middleName" name="middleName">
+          </div>
+        </div>
+      <div class="col-md-2">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" required
+                   [(ngModel)]="order.lastName" name="lastName"
+                   #lastName="ngModel">
+          </div>
+          <div [hidden]="lastName.valid || lastName.pristine"
+               class="alert alert-danger">
+            Last Name is required
+          </div>
+        </div>
     </div>
     <div class="form-group">
-      <label for="middleName">Middle Name</label>
-      <input type="text" class="form-control" id="middleName"
-             [(ngModel)]="order.middleName" name="middleName">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" required
+             [(ngModel)]="order.email" name="email"
+             #email="ngModel"
+             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
     </div>
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" required
-             [(ngModel)]="order.lastName" name="lastName">
+    <div [hidden]="email.valid || email.untouched"  class="alert alert-danger">
+      <div *ngIf="email.errors && email.errors.required" >
+        Email is required
+      </div>
+      <div *ngIf="email.errors && email.errors.pattern" >
+        Email is invalid
+      </div>
     </div>
+
+      <div class="form-group">
+        <label for="orderComment">Additional Comment</label>
+        <textarea rows="5" cols="80" id="orderComment" class="form-control" [(ngModel)]="order.orderComment" name="orderComment"></textarea>
+      </div>
+
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control"
