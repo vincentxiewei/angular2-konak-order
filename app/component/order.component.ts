@@ -18,18 +18,11 @@ import {Response, Http} from "@angular/http";
   providers: [OrderService]
 })
 export class OrderComponent implements OnInit {
-//  export class OrderComponent {
-  //orders: Observable<Order[]>;
-  //private searchTerms = new Subject<string>();
-  errorMessage: string;
 
     powers = ['Really Smart', 'Super Flexible',
     'Super Hot', 'Weather Changer'];
 
     countries = ['Australia', 'China', 'America'];
-
-    //order = new Order(18, 'Vincent', 'Xie',
-    //            'Dr IQ', this.powers[0], 'Chuck Overstreet');
 
     order = new Order();
     //this is to reset the angular form for validation
@@ -45,14 +38,23 @@ export class OrderComponent implements OnInit {
       console.log("form has been submitted");
       console.log(JSON.stringify(this.order));
 
-      this.orderService.getOrders().then(orders =>
-        this.orders = orders);
+      this.orderService.create(this.order)
+        .then(order => {
+            this.orders.push(order);
+            this.gotoOrderConfirmation(order);
+        }
+
+        );
+
+
+
+      //this.orderService.getOrders().then(orders =>
+      //  this.orders = orders);
       //this.orderService.getOrders2().then(orders =>
       //  this.orders = orders);
       //console.log(this.orders[0].firstName);
       console.log(this.order.toString());
       console.log("completed loading orders");
-
     }
 
 // TODO: Remove this when we're done
@@ -79,6 +81,12 @@ export class OrderComponent implements OnInit {
 
      //this.getOrdersTest();
     //this.getFoods();
+  }
+
+  gotoOrderConfirmation( newOrder : Order): void {
+    console.log("new Order is: "+newOrder.firstName);
+    this.router.navigate(['/orderConfirmation', newOrder.id]);
+    console.log("routing to confirmation finished: "+newOrder.firstName);
   }
 /*
   //orders: Order[];

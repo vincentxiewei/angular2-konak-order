@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroDetailComponent }      from './hero-detail.component';
 
 import { OrderComponent }      from './component/order.component';
+import {OrderConfirmationComponent} from "./component/order-confirmation.component";
 
 const appRoutes: Routes = [
   {
@@ -16,6 +17,10 @@ const appRoutes: Routes = [
   {
     path: 'order',
     component: OrderComponent
+  },
+  {
+    path: 'orderConfirmation/:id',
+    component: OrderConfirmationComponent
   },
 /*  {
     path: '',

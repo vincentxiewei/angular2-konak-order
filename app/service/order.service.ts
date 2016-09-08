@@ -20,7 +20,7 @@ export class OrderService {
   }
 */
 
- // private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new Headers({'Content-Type': 'application/json'});
 //  private heroesUrl = 'app/heroes';  // URL to web api
 
   private konakOrderUrl = 'http://localhost:8080/order';  // URL to web api
@@ -33,6 +33,25 @@ export class OrderService {
       .then(response => response.json() as Order[])
       .catch(this.handleError);
   }
+
+  create(order: Order): Promise<Order> {
+    console.log("in Create"+JSON.stringify(order));
+    return this.http
+      .post(this.konakOrderUrl, JSON.stringify(order), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getOrder (id :number): Promise<Order> {
+    console.log("Inside getOrder by ID"+ this.konakOrderUrl+"/"+id);
+    return this.http.get(this.konakOrderUrl+"/"+id)
+      .toPromise()
+      .then (response => response.json() as Order)
+      .catch(this.handleError)
+
+  }
+
 /*
   //testURL = 'http://jsonplaceholder.typicode.com/posts/1';
   //testURL = 'http://www.thomas-bayer.com/sqlrest/CUSTOMER/';

@@ -1,0 +1,10 @@
+{{diagnostic}}
+<div *ngIf = 'order'>
+  <h2>{{order.firstName}} details!</h2>
+  <div><label>id: </label>{{order.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)] = "order.firstName" placeholder="firsName">
+  </div>
+  <button (click)="goBack()">Back</button>
+</div>

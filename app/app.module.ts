@@ -22,7 +22,7 @@ import { HeroSearchComponent} from './hero-search.component';
 //Order
 import {OrderComponent} from './component/order.component';
 import { OrderService }         from './service/order.service';
-
+import { OrderConfirmationComponent} from './component/order-confirmation.component';
 
 //Order
 
@@ -37,7 +37,8 @@ import { OrderService }         from './service/order.service';
     HeroesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    OrderComponent],
+    OrderComponent,
+    OrderConfirmationComponent],
   providers: [HeroService, OrderService],
   bootstrap: [ AppComponent ]
 
