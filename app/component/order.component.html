@@ -4,7 +4,7 @@
   <h1>Order Form</h1>
   <form *ngIf = "active" (ngSubmit)="onSubmit()" #orderForm="ngForm">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <div class="form-group">
             <label for="firstName">First Name</label>
             <input type="text" class="form-control"
@@ -17,14 +17,14 @@
             First Name is required
           </div>
         </div>
-      <div class="col-md-2">
+      <div class="col-md-4">
           <div class="form-group">
             <label for="middleName">Middle Name</label>
             <input type="text" class="form-control" id="middleName"
                    [(ngModel)]="order.middleName" name="middleName">
           </div>
         </div>
-      <div class="col-md-2">
+      <div class="col-md-4">
           <div class="form-group">
             <label for="lastName">Last Name</label>
             <input type="text" class="form-control" id="lastName" required
@@ -53,54 +53,68 @@
       </div>
     </div>
 
-      <div class="form-group">
-        <label for="orderComment">Additional Comment</label>
-        <textarea rows="5" cols="80" id="orderComment" class="form-control" [(ngModel)]="order.orderComment" name="orderComment"></textarea>
-      </div>
-
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control"
-             id="name" required
-            [(ngModel)]="order.name" name="name"
-            #name="ngModel">
-    </div>
-    <div [hidden]="name.valid || name.pristine"
-         class="alert alert-danger">
-      Name is required
-    </div>
-    <div class="form-group">
-      <label for="alterEgo">Alter Ego</label>
-      <input type="text" class="form-control" id="alterEgo">
-    </div>
-
-    <div class="form-group">
-      <label for="power">Hero Power</label>
-      <select class="form-control" id="power" required
-       [(ngModel)] = "order.power" name="power">
-        <option *ngFor="let p of powers" [value]="p">{{p}}</option>
+      <label for="billingCountry">Country</label>
+      <select class="form-control" id="billingCountry" required
+              [(ngModel)] = "order.billingCountry" name="billingCountry">
+        <option *ngFor="let p of countries" [value]="p">{{p}}</option>
       </select>
     </div>
+    <div class="form-group">
+      <label for="orderComment">Additional Comment</label>
+      <textarea rows="5" cols="80" id="orderComment" class="form-control" [(ngModel)]="order.orderComment" name="orderComment"></textarea>
+    </div>
+    <!--
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control"
+                 id="name" required
+                [(ngModel)]="order.name" name="name"
+                #name="ngModel">
+        </div>
+        <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger">
+          Name is required
+        </div>
+        <div class="form-group">
+          <label for="alterEgo">Alter Ego</label>
+          <input type="text" class="form-control" id="alterEgo">
+        </div>
 
+        <div class="form-group">
+          <label for="power">Hero Power</label>
+          <select class="form-control" id="power" required
+           [(ngModel)] = "order.power" name="power">
+            <option *ngFor="let p of powers" [value]="p">{{p}}</option>
+          </select>
+        </div>
+        -->
     <button type="submit" class="btn btn-default" [disabled]="!orderForm.form.valid">Submit</button>
     <button type="button" class="btn btn-default" (click)="resetOrder()">Reset</button>
   </form>
 </div>
 </div>
 <div [hidden]="!submitted">
-  <h2>You submitted the following:</h2>
+
+  <div *ngIf="!orderCreatedOnServer"><h1>Your request is being processed. Please wait</h1></div>
+  <div *ngIf="orderCreatedOnServer">
+    <h1> Your order has been sent successfully. Ref ID: {{order.id}} </h1>
+  </div>
+  <h2>Request Details:</h2>
   <div class="row">
     <div class="col-xs-3">Name</div>
-    <div class="col-xs-9  pull-left">{{ order.name }}</div>
+    <div class="col-xs-9  pull-left">{{ order.firstName}} {{ order.middleName}} {{ order.lastName}}</div>
   </div>
   <div class="row">
-    <div class="col-xs-3">Alter Ego</div>
-    <div class="col-xs-9 pull-left">{{ order.alterEgo }}</div>
+    <div class="col-xs-3">Email</div>
+    <div class="col-xs-9 pull-left">{{ order.email }}</div>
   </div>
   <div class="row">
-    <div class="col-xs-3">Power</div>
-    <div class="col-xs-9 pull-left">{{ order.power }}</div>
+    <div class="col-xs-3">Order Comment:</div>
+    <div class="col-xs-9 pull-left">{{ order.orderComment }}</div>
   </div>
   <br>
-  <button class="btn btn-default" (click)="submitted=false">Edit</button>
+  <!--<button class="btn btn-default" (click)="submitted=false">Edit</button>-->
+  <button class="btn btn-default" (click)="resetOrder()">Create New Order</button>
+
 </div>

@@ -19,68 +19,56 @@ import {Response, Http} from "@angular/http";
 })
 export class OrderComponent implements OnInit {
 
-    powers = ['Really Smart', 'Super Flexible',
+  constructor(private orderService: OrderService, private router: Router) {}
+
+  powers = ['Really Smart', 'Super Flexible',
     'Super Hot', 'Weather Changer'];
+  countries = ['Australia', 'China', 'America'];
 
-    countries = ['Australia', 'China', 'America'];
+  order = new Order();
+  orders : Order[];
 
-    order = new Order();
-    //this is to reset the angular form for validation
-    active = true;
+  //this is to reset the angular form for validation
+  active = true;
+  submitted = false;
+  //Rest server message
+  errorRESTAPI : string;
+  orderCreatedOnServer = false;
 
-    orders : Order[];
+  // New order submitted
+  onSubmit () {
+    this.submitted = true;
+    console.log("form has been submitted");
+    console.log(JSON.stringify(this.order));
 
-    submitted = false;
+    this.orderService.create(this.order)
+      .then(order => {
+          this.orders.push(order);
+          this.orderCreated(order);
+          this.order = order;
+          //this.gotoOrderConfirmation(order);
+      });
+    console.log("completed form");
+  }
+  orderCreated (newOrder : Order) {
+    console.log(newOrder.id + " "+ newOrder.firstName);
+    this.orderCreatedOnServer = true;
+  }
 
-    onSubmit () {
-
-      this.submitted = true;
-      console.log("form has been submitted");
-      console.log(JSON.stringify(this.order));
-
-      this.orderService.create(this.order)
-        .then(order => {
-            this.orders.push(order);
-            this.gotoOrderConfirmation(order);
-        }
-
-        );
-
-
-
-      //this.orderService.getOrders().then(orders =>
-      //  this.orders = orders);
-      //this.orderService.getOrders2().then(orders =>
-      //  this.orders = orders);
-      //console.log(this.orders[0].firstName);
-      console.log(this.order.toString());
-      console.log("completed loading orders");
-    }
-
-// TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.order) +
-      JSON.stringify(this.orders); }
-
-  constructor(
-    private orderService: OrderService,
-    private router: Router) {}
-    //private http: Http
-
+  //this function resets order form
   resetOrder() {
     //this.order = new Order(24, "","","","");
     this.order = new Order();
     this.active = false;
     setTimeout(() => this.active = true, 0);
+    this.submitted = false;
+    this.orderCreatedOnServer = false;
   }
   ngOnInit(): void {
-
     console.log("Inside onInit");
     this.orderService.getOrders().then(orders =>
       this.orders = orders);
     console.log("completed inside onInit");
-
-     //this.getOrdersTest();
-    //this.getFoods();
   }
 
   gotoOrderConfirmation( newOrder : Order): void {
@@ -88,6 +76,10 @@ export class OrderComponent implements OnInit {
     this.router.navigate(['/orderConfirmation', newOrder.id]);
     console.log("routing to confirmation finished: "+newOrder.firstName);
   }
+
+  //TODO: Remove this when we're done
+  get diagnostic() { return JSON.stringify(this.order) +
+    JSON.stringify(this.orders); }
 /*
   //orders: Order[];
   private konakOrderUrl = 'http://localhost:8080/order';
