@@ -3,7 +3,7 @@ import './rxjs-extensions';
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
+import { HttpModule, JsonpModule }    from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
@@ -28,8 +28,9 @@ import { OrderService }         from './service/order.service';
 
 
 @NgModule({
-  imports: [ BrowserModule, FormsModule,HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),routing //],
+  imports: [ BrowserModule, FormsModule,HttpModule,JsonpModule,
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
+    routing //],
     , Ng2BootstrapModule],
   declarations: [ AppComponent,
     HeroDetailComponent,

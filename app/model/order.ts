@@ -1,5 +1,5 @@
 export class Order {
-  //id : number;
+  id : number;
   firstName : string;
   middleName : string;
   lastName : string;

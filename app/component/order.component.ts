@@ -8,6 +8,7 @@ import { Subject }           from 'rxjs/Subject';
 //import { HeroSearchService } from './hero-search.service';
 import { OrderService } from './../service/order.service';
 import { Order } from './../model/Order';
+import {Response, Http} from "@angular/http";
 
 @Component({
   selector: 'order',
@@ -20,6 +21,7 @@ export class OrderComponent implements OnInit {
 //  export class OrderComponent {
   //orders: Observable<Order[]>;
   //private searchTerms = new Subject<string>();
+  errorMessage: string;
 
     powers = ['Really Smart', 'Super Flexible',
     'Super Hot', 'Weather Changer'];
@@ -33,6 +35,8 @@ export class OrderComponent implements OnInit {
     //this is to reset the angular form for validation
     active = true;
 
+    orders : Order[];
+
     submitted = false;
 
     onSubmit () {
@@ -40,14 +44,25 @@ export class OrderComponent implements OnInit {
       this.submitted = true;
       console.log("form has been submitted");
       console.log(JSON.stringify(this.order));
+
+      this.orderService.getOrders().then(orders =>
+        this.orders = orders);
+      //this.orderService.getOrders2().then(orders =>
+      //  this.orders = orders);
+      //console.log(this.orders[0].firstName);
+      console.log(this.order.toString());
+      console.log("completed loading orders");
+
     }
 
 // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.order); }
+  get diagnostic() { return JSON.stringify(this.order) +
+      JSON.stringify(this.orders); }
 
   constructor(
     private orderService: OrderService,
     private router: Router) {}
+    //private http: Http
 
   resetOrder() {
     //this.order = new Order(24, "","","","");
@@ -57,10 +72,33 @@ export class OrderComponent implements OnInit {
   }
   ngOnInit(): void {
 
+    console.log("Inside onInit");
+    this.orderService.getOrders().then(orders =>
+      this.orders = orders);
+    console.log("completed inside onInit");
 
+     //this.getOrdersTest();
+    //this.getFoods();
   }
+/*
+  //orders: Order[];
+  private konakOrderUrl = 'http://localhost:8080/order';
+  getFoods() {
+    this.http.get(this.konakOrderUrl)
+      .map((res:Response) => res.json())
+      .subscribe(
+        data => { this.orders = data},
+        err => console.error(err),
+        () => console.log('done')
+      );
+  }
+    getOrdersTest() {
+      this.orderService.getOrdersOB().subscribe (
+        orders => this.orders = orders,
+        error => this.errorMessage = <any> error);
 
-
+    }
+*/
   // Push a search term into the observable stream.
   /*
   search(term: string): void {
