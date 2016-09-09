@@ -1,4 +1,6 @@
 {{diagnostic}}
+
+<!--
 <div *ngIf = 'order'>
   <h2>{{order.firstName}} details!</h2>
   <div><label>id: </label>{{order.id}}</div>
@@ -8,3 +10,43 @@
   </div>
   <button (click)="goBack()">Back</button>
 </div>
+-->
+
+
+<!-- Error color "text-danger"-->
+
+<div *ngIf="!order"><h1 class="text-primary">Loading Order Details. Please wait...</h1></div>
+<div *ngIf="order">
+  <h2>Order Details: </h2>
+  <div class="row">
+    <div class="col-xs-3">Ref ID</div>
+    <div class="col-xs-9  pull-left">{{ order.id}}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Order Time</div>
+    <div class="col-xs-9  pull-left">{{ order.createdTAD}}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Name</div>
+    <div class="col-xs-9  pull-left">{{ order.firstName}} {{ order.middleName}} {{ order.lastName}}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Phone Number</div>
+    <div class="col-xs-9 pull-left">{{ order.contactNumber}}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Email</div>
+    <div class="col-xs-9 pull-left">{{ order.email }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Product</div>
+    <div class="col-xs-9 pull-left">{{ order.productName}}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Order Comment:</div>
+    <div class="col-xs-9 pull-left">{{ order.orderComment }}</div>
+  </div>
+  <br>
+
+</div>
+

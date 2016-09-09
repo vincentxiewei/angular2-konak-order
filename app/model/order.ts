@@ -5,13 +5,14 @@ export class Order {
   lastName : string;
   email : string;
   contactAreaCode: string;
-  contactNumber: string
+  contactNumber: string;
   billingStreet1 : string;
   billingStreet2 : string;
   billingCity : string;
   billingState : string;
   billingZipCode : string;
   billingCountry : string;
+  productName: string;
   orderComment : string;
 
   createdBy : string;

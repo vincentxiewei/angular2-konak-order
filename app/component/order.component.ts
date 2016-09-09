@@ -24,8 +24,9 @@ export class OrderComponent implements OnInit {
   powers = ['Really Smart', 'Super Flexible',
     'Super Hot', 'Weather Changer'];
   countries = ['Australia', 'China', 'America'];
+  products = ['NICE Billing Suite v2.5', 'NICE Invoice Management', 'NICE Billing Suite 30 day trial'];
 
-  order = new Order();
+  order: Order;
   orders : Order[];
 
   //this is to reset the angular form for validation
@@ -62,13 +63,16 @@ export class OrderComponent implements OnInit {
   resetOrder() {
     //this.order = new Order(24, "","","","");
     this.order = new Order();
+    this.order.productName='NICE Billing Suite v2.5';
+
     this.active = false;
     setTimeout(() => this.active = true, 0);
     this.submitted = false;
     this.orderCreatedOnServer = false;
   }
   ngOnInit(): void {
-    console.log("Inside onInit");
+    this.order = new Order();
+    this.order.productName ='NICE Billing Suite v2.5'
     this.orderService.getOrders().then(orders =>
       this.orders = orders);
     console.log("completed inside onInit");
@@ -81,8 +85,7 @@ export class OrderComponent implements OnInit {
   }
 
   //TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.order) +
-    JSON.stringify(this.orders); }
+  get diagnostic() { return JSON.stringify(this.order);}
 /*
   //orders: Order[];
   private konakOrderUrl = 'http://localhost:8080/order';
