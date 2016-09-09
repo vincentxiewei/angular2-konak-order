@@ -14,6 +14,13 @@ export class Order {
   billingCountry : string;
   orderComment : string;
 
+  createdBy : string;
+  updatedBy : string;
+  createdTAD : string;
+  updatedTAD : string;
+  emailSent : boolean;
+  emailSentTAD : string;
+
   constructor(){}
   /*
 

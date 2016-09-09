@@ -96,10 +96,11 @@
 </div>
 <div [hidden]="!submitted">
 
-  <div *ngIf="!orderCreatedOnServer"><h1>Your request is being processed. Please wait</h1></div>
+  <div *ngIf="!orderCreatedOnServer"><h1 class="text-primary">Your request is being processed. Please wait...</h1></div>
   <div *ngIf="orderCreatedOnServer">
-    <h1> Your order has been sent successfully. Ref ID: {{order.id}} </h1>
+    <h1 class="text-success"> Your order has been sent successfully. Order ID: {{order.id}} Time: {{order.createdTAD}}</h1>
   </div>
+  <!-- Error color "text-danger"-->
   <h2>Request Details:</h2>
   <div class="row">
     <div class="col-xs-3">Name</div>

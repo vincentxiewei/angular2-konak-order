@@ -51,8 +51,11 @@ export class OrderComponent implements OnInit {
     console.log("completed form");
   }
   orderCreated (newOrder : Order) {
-    console.log(newOrder.id + " "+ newOrder.firstName);
-    this.orderCreatedOnServer = true;
+    console.log(newOrder.id + " "+ newOrder.firstName + " "+ newOrder.emailSent+" " +newOrder.emailSentTAD);
+
+    if (newOrder.id && newOrder.emailSent) {
+      this.orderCreatedOnServer = true;
+    }
   }
 
   //this function resets order form
