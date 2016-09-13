@@ -22,6 +22,7 @@ export class OrderConfirmationComponent implements OnInit {
 
   //@Input()
   order: Order;
+  errorRESTAPI : string;
 
   constructor(
     private orderService: OrderService,
@@ -30,7 +31,11 @@ export class OrderConfirmationComponent implements OnInit {
   ngOnInit () :void {
     this.route.params.forEach ((params : Params) => {
         let id = +params['id'];
-        this.orderService.getOrder(id).then(order => this.order = order);
+        this.orderService.getOrder(id)
+            .then(order => this.order = order)
+            .catch(errorMessage => {
+              this.errorRESTAPI = errorMessage;
+            });;
       }
     )
   }

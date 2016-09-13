@@ -48,6 +48,8 @@ export class OrderComponent implements OnInit {
           this.orderCreated(order);
           this.order = order;
           //this.gotoOrderConfirmation(order);
+      }).catch(errorMessage => {
+        this.errorRESTAPI = errorMessage;
       });
     console.log("completed form");
   }
@@ -56,7 +58,10 @@ export class OrderComponent implements OnInit {
 
     if (newOrder.id && newOrder.emailSent) {
       this.orderCreatedOnServer = true;
+    } else {
+      this.errorRESTAPI = "There was an error crating your order. Please contact: +61 2 9876 1234";
     }
+
   }
 
   //this function resets order form
@@ -69,6 +74,7 @@ export class OrderComponent implements OnInit {
     setTimeout(() => this.active = true, 0);
     this.submitted = false;
     this.orderCreatedOnServer = false;
+    this.errorRESTAPI = null;
   }
   ngOnInit(): void {
     this.order = new Order();

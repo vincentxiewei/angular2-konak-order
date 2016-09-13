@@ -118,7 +118,7 @@
 </div>
 <div [hidden]="!submitted">
 
-  <div *ngIf="!orderCreatedOnServer"><h1 class="text-primary">Your request is being processed. Please wait...</h1></div>
+  <div *ngIf="!orderCreatedOnServer && !errorRESTAPI"><h1 class="text-primary">Your request is being processed. Please wait...</h1></div>
   <div *ngIf="orderCreatedOnServer">
     <h1 class="text-success"> Your order has been sent successfully. Order ID: {{order.id}} Time: {{order.createdTAD}}</h1>
   </div>
@@ -148,5 +148,10 @@
   <!--<button class="btn btn-default" (click)="submitted=false">Edit</button>-->
   <div *ngIf="orderCreatedOnServer">
     <button class="btn btn-default" (click)="resetOrder()">Create New Order</button>
+  </div>
+
+  <div *ngIf="errorRESTAPI">
+    <h1 class="text-danger">There was an error loading your order.</h1>
+    <h2> Error details: {{errorRESTAPI}}</h2>
   </div>
 </div>
